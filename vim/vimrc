@@ -1,0 +1,84 @@
+"============= PLUGINS =============
+call plug#begin('~/.vim/plugged')
+Plug 'altercation/vim-colors-solarized'
+Plug 'bronson/vim-trailing-whitespace' "remove trailing whitespaces
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/vim-nerdtree_plugin_open' "open files by default app
+Plug 'pangloss/vim-javascript' "javascript syntax
+Plug 'mxw/vim-jsx' "jsx syntax
+Plug 'alvan/vim-closetag' "auto close xml tag
+Plug 'jiangmiao/auto-pairs' "auto brackets, quotes, ...
+Plug 'mileszs/ack.vim' "find in files
+Plug 'kshenoy/vim-signature' "show marks
+Plug 'bling/vim-airline' "theme
+Plug 'Valloric/YouCompleteMe' "auto completion support
+Plug 'tpope/vim-fugitive' "git plugin
+Plug 'elzr/vim-json' "json highlighting, no-js warnings
+Plug 'tpope/vim-surround' "change brackets, quotes quickly
+Plug 'scrooloose/nerdcommenter' "comment utility
+Plug 'tpope/vim-repeat' "improved dot command
+Plug 'tpope/vim-unimpaired' "moving through lists
+Plug 'Galooshi/vim-import-js' "import utility for js: npm install -g import-js
+Plug 'christoomey/vim-tmux-navigator' "seamles tmux-vim navigation ctrl+hjkl
+Plug 'godlygeek/tabular' "tabular indentation utils
+Plug 'w0rp/ale' "linting, auto fixing engine
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+call plug#end()
+
+"============= PREFERENCES =============
+set clipboard^=unnamed,unnamedplus
+set hls
+set incsearch
+set autoindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set nu
+set swapfile
+set backupcopy=yes
+set dir=~/tmp
+set wildignore+=*/player/lib/* "custom ignore files
+
+filetype plugin indent on
+let g:nerdtree_plugin_open_cmd = 'xdg-open'
+let g:javascript_plugin_jsdoc = 1
+let g:jsx_ext_required = 0
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let NERDTreeAutoDeleteBuffer = 1
+autocmd BufNewFile,BufRead *.md set syntax=markdown
+syntax enable
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " close vim if the only window left open
+
+"============= BINDINGS =============
+nmap <Enter> :NERDTreeFind<CR>
+nmap <F5> :w<CR>:!node %<CR>
+nmap <Space> :Buffers<CR>
+nmap <C-@> :Ag<CR>
+nmap <C-p> <Esc>:GFiles --others --cached --exclude-standard<CR>
+
+"============= THEME =============
+colorscheme solarized
+set colorcolumn=80
+set t_Co=256
+set background=dark
+
+"============= LINTING =============
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_column_always = 1
+let g:ale_fix_on_save = 1
+let g:ale_linters = {}
+let g:ale_linters['javascript'] = ['eslint']
+let g:ale_linters['typescript'] = ['tslint', 'tsserver']
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['typescript'] = ['tslint', 'prettier']
+let g:ale_fixers['scss'] = ['prettier']
+let g:ale_fixers['json'] = ['prettier']
+"let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi false'
+let g:ale_javascript_prettier_use_local_config = 1
