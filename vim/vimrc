@@ -64,9 +64,9 @@ nmap <C-p> <Esc>:GFiles --others --cached --exclude-standard<CR>
 "go to file on line
 nnoremap <leader>f f.gf
 nnoremap <leader>ft f.gf
-"go to first found css file
-nnoremap <leader>c gg:keepp /.cssf.gf
-nnoremap <leader>ct gg:keepp /.cssf.gf
+"go to first found style file
+nnoremap <leader>s gg:keepp /.css\\|.lessf.gf
+nnoremap <leader>st gg:keepp /.css\\|.lessf.gf
 
 "============= THEME =============
 colorscheme solarized
