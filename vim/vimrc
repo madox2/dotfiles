@@ -54,6 +54,7 @@ let NERDTreeAutoDeleteBuffer = 1
 autocmd BufNewFile,BufRead *.md set syntax=markdown
 syntax enable
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " close vim if the only window left open
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0) "don't search filenames with Ag command
 
 "============= BINDINGS =============
 nmap <Enter> :NERDTreeFind<CR>
