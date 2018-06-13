@@ -1,6 +1,5 @@
 "============= PLUGINS =============
 call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
 Plug 'bronson/vim-trailing-whitespace' "remove trailing whitespaces
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/vim-nerdtree_plugin_open' "open files by default app
@@ -70,7 +69,8 @@ nnoremap <leader>s gg:keepp /.css\\|.lessf.gf
 nnoremap <leader>st gg:keepp /.css\\|.lessf.gf
 
 "============= THEME =============
-colorscheme solarized
+" Use terminal themes from https://github.com/Mayccoll/Gogh
+highlight colorcolumn ctermbg=0
 set colorcolumn=80
 set t_Co=256
 set background=dark
