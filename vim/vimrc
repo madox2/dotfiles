@@ -62,7 +62,7 @@ nmap <F5> :w<CR>:!node %<CR>
 nmap <Space> :Buffers<CR>
 nmap <C-@> :Ag<CR>
 "find in lines - list exports by default
-nmap <C-o> :BLines export <CR>
+nmap <C-o> :BLines export \| function <CR>
 nmap <C-p> <Esc>:GFiles --others --cached --exclude-standard<CR>
 "go to file on line
 nnoremap <leader>f f.gf
