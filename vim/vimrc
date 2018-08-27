@@ -54,7 +54,7 @@ autocmd BufNewFile,BufRead *.md set syntax=markdown
 syntax enable
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " close vim if the only window left open
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0) "don't search filenames with Ag command
-command! -bang -nargs=* Kb call fzf#vim#ag(<q-args>, extend(fzf#vim#with_preview('right'), {'dir': '~/kb/'}), <bang>0) "search knowladge base with preview
+command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, extend(fzf#vim#with_preview('right'), {'dir': '~/Dropbox/DEV/kb/'}), <bang>0) "search knowladge base with preview
 
 "============= BINDINGS =============
 nmap <Enter> :NERDTreeFind<CR>
