@@ -56,20 +56,25 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0) "don't search filenames with Ag command
 command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, extend(fzf#vim#with_preview('right'), {'dir': '~/Dropbox/DEV/kb/'}), <bang>0) "search knowladge base with preview
 
+
 "============= BINDINGS =============
 nmap <Enter> :NERDTreeFind<CR>
 nmap <F5> :w<CR>:!node %<CR>
 nmap <Space> :Buffers<CR>
 nmap <C-@> :Ag<CR>
-"find in lines - list exports by default
-nmap <C-o> :BLines export \| function <CR>
-nmap <C-p> <Esc>:GFiles --others --cached --exclude-standard<CR>
 "go to file on line
 nnoremap <leader>f f.gf
 nnoremap <leader>ft f.gf
 "go to first found style file
 nnoremap <leader>s gg:keepp /.css\\|.lessf.gf
 nnoremap <leader>st gg:keepp /.css\\|.lessf.gf
+"fix `enter` in quickfix list
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+
+"imporved default fzf command to exclude ignore files
+"https://github.com/junegunn/fzf.vim/issues/121
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
+nmap <C-p> <Esc>:Files<CR>
 
 "============= THEME =============
 " Use terminal themes from https://github.com/Mayccoll/Gogh
