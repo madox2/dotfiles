@@ -1,6 +1,5 @@
 "============= PLUGINS =============
 call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
 Plug 'bronson/vim-trailing-whitespace' "remove trailing whitespaces
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/vim-nerdtree_plugin_open' "open files by default app
@@ -55,23 +54,31 @@ autocmd BufNewFile,BufRead *.md set syntax=markdown
 syntax enable
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " close vim if the only window left open
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0) "don't search filenames with Ag command
-command! -bang -nargs=* Kb call fzf#vim#ag(<q-args>, extend(fzf#vim#with_preview('right'), {'dir': '~/kb/'}), <bang>0) "search knowladge base with preview
+command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, extend(fzf#vim#with_preview('right'), {'dir': '~/Dropbox/DEV/kb/'}), <bang>0) "search knowladge base with preview
+autocmd VimLeave * call system("xsel -ib", getreg('+')) "prevent clearing clipboard after closing (https://stackoverflow.com/a/9381778/741871)
 
 "============= BINDINGS =============
 nmap <Enter> :NERDTreeFind<CR>
 nmap <F5> :w<CR>:!node %<CR>
 nmap <Space> :Buffers<CR>
 nmap <C-@> :Ag<CR>
-nmap <C-p> <Esc>:GFiles --others --cached --exclude-standard<CR>
 "go to file on line
 nnoremap <leader>f f.gf
 nnoremap <leader>ft f.gf
 "go to first found style file
 nnoremap <leader>s gg:keepp /.css\\|.lessf.gf
 nnoremap <leader>st gg:keepp /.css\\|.lessf.gf
+"fix `enter` in quickfix list
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+
+"imporved default fzf command to exclude ignore files
+"https://github.com/junegunn/fzf.vim/issues/121
+let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
+nmap <C-p> <Esc>:Files<CR>
 
 "============= THEME =============
-colorscheme solarized
+" Use terminal themes from https://github.com/Mayccoll/Gogh
+highlight colorcolumn ctermbg=0
 set colorcolumn=80
 set t_Co=256
 set background=dark
