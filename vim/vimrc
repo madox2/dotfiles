@@ -26,6 +26,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 call plug#end()
 
 "============= PREFERENCES =============
