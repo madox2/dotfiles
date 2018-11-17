@@ -10,7 +10,7 @@ Plug 'jiangmiao/auto-pairs' "auto brackets, quotes, ...
 Plug 'mileszs/ack.vim' "find in files
 Plug 'kshenoy/vim-signature' "show marks
 Plug 'bling/vim-airline' "theme
-Plug 'Valloric/YouCompleteMe' "auto completion support
+Plug 'Valloric/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': './install.sh' } "auto completion support
 Plug 'tpope/vim-fugitive' "git plugin
 Plug 'elzr/vim-json' "json highlighting, no-js warnings
 Plug 'tpope/vim-surround' "change brackets, quotes quickly
@@ -28,6 +28,12 @@ Plug 'leafgarland/typescript-vim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 call plug#end()
+
+"============= NOTES =============
+"
+"JS/TS autocompletion
+" - install typescript (npm i -g typescript)
+" - https://github.com/Valloric/YouCompleteMe#javascript-and-typescript-semantic-completion
 
 "============= PREFERENCES =============
 set clipboard^=unnamed,unnamedplus
