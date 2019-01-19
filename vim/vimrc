@@ -24,13 +24,13 @@ Plug 'w0rp/ale' "linting, auto fixing engine
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim' "typescript code highlighting
+Plug 'ianks/vim-tsx' "support jsx in tsx
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 call plug#end()
 
 "============= NOTES =============
-"
 "JS/TS autocompletion
 " - install typescript (npm i -g typescript)
 " - https://github.com/Valloric/YouCompleteMe#javascript-and-typescript-semantic-completion
@@ -47,34 +47,33 @@ set nu
 set swapfile
 set backupcopy=yes
 set dir=~/tmp
-set wildignore+=*/player/lib/* "custom ignore files
+set shortmess+=A
 
 filetype plugin indent on
+syntax enable
 let g:nerdtree_plugin_open_cmd = 'xdg-open'
 let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx,*.tsx"
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let NERDTreeAutoDeleteBuffer = 1
 autocmd BufNewFile,BufRead *.md set syntax=markdown
-syntax enable
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " close vim if the only window left open
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0) "don't search filenames with Ag command
-command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, extend(fzf#vim#with_preview('right'), {'dir': '~/Dropbox/DEV/kb/'}), <bang>0) "search knowladge base with preview
-autocmd VimLeave * call system("xsel -ib", getreg('+')) "prevent clearing clipboard after closing (https://stackoverflow.com/a/9381778/741871)
+" close vim if the only window left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" don't search filenames with Ag command
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+" search knowladge base with preview
+command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, extend(fzf#vim#with_preview('right'), {'dir': '~/Dropbox/DEV/kb/'}), <bang>0)
+" prevent clearing clipboard after closing (https://stackoverflow.com/a/9381778/741871)
+autocmd VimLeave * call system("xsel -ib", getreg('+'))
 
 "============= BINDINGS =============
 nmap <Enter> :NERDTreeFind<CR>
 nmap <F5> :w<CR>:!node %<CR>
 nmap <Space> :Buffers<CR>
 nmap <C-@> :Ag<CR>
-"go to file on line
-nnoremap <leader>f f.gf
-nnoremap <leader>ft f.gf
-"go to first found style file
-nnoremap <leader>s gg:keepp /.css\\|.lessf.gf
-nnoremap <leader>st gg:keepp /.css\\|.lessf.gf
+nmap <C-N> :BLines<CR>
 "fix `enter` in quickfix list
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
@@ -99,8 +98,37 @@ let g:ale_linters['javascript'] = ['eslint']
 let g:ale_linters['typescript'] = ['tslint', 'tsserver']
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['typescript'] = ['tslint', 'prettier']
+let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_fixers['scss'] = ['prettier']
 let g:ale_fixers['json'] = ['prettier']
-"let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi false'
 let g:ale_javascript_prettier_use_local_config = 1
+
+
+"============= DIAGNOSTIC/COMPLETER =============
+" tyypescript/javascript mappings
+nnoremap <leader>gg :YcmCompleter GoTo<CR>
+nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gt :YcmCompleter GoToType<CR>
+nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <leader>t :YcmCompleter GetType<CR>
+
+"============= WORKAROUNDS =============
+
+" hide diagnostic symbols in YCM (errors will be highlighted with ale)
+" https://github.com/Valloric/YouCompleteMe/issues/1192#issuecomment-56555948
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+
+" Allow to open files in quicklist in fzf
+" https://github.com/junegunn/fzf/blob/master/README-VIM.md#examples
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
