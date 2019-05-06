@@ -28,6 +28,7 @@ Plug 'leafgarland/typescript-vim' "typescript code highlighting
 Plug 'ianks/vim-tsx' "support jsx in tsx
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
+Plug 'jparise/vim-graphql' "syntax highlighting for graphql
 call plug#end()
 
 "============= NOTES =============
@@ -82,6 +83,9 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
 nmap <C-p> <Esc>:Files<CR>
 
+" knowladge base shortcut
+nnoremap <leader>kb :KB<CR>
+
 "============= THEME =============
 " Use terminal themes from https://github.com/Mayccoll/Gogh
 highlight colorcolumn ctermbg=0
@@ -110,6 +114,7 @@ nnoremap <leader>gg :YcmCompleter GoTo<CR>
 nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gt :YcmCompleter GoToType<CR>
 nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
+nnoremap <leader>f :YcmCompleter FixIt<CR>
 nnoremap <leader>t :YcmCompleter GetType<CR>
 
 "============= WORKAROUNDS =============
@@ -132,3 +137,13 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
+
+" Proper closetag regions for typescript
+let g:closetag_regions =  {
+\ 'typescript.tsx': 'jsxRegion,tsxRegion',
+\ 'javascript.jsx': 'jsxRegion',
+\ }
+
+" EXPERIMENTAL
+set hidden
+set autoread
