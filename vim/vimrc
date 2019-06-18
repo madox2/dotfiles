@@ -49,6 +49,8 @@ set swapfile
 set backupcopy=yes
 set dir=~/tmp
 set shortmess+=A
+set hidden
+set autoread
 
 filetype plugin indent on
 syntax enable
@@ -143,7 +145,3 @@ let g:closetag_regions =  {
 \ 'typescript.tsx': 'jsxRegion,tsxRegion',
 \ 'javascript.jsx': 'jsxRegion',
 \ }
-
-" EXPERIMENTAL
-set hidden
-set autoread
