@@ -6,6 +6,7 @@
 
 - link:
     ~/.tmux.conf: tmux/tmux.conf
+    ~/.tmux.new-workspace.conf: tmux/tmux.new-workspace.conf
     ~/.vimrc: vim/vimrc
     ~/.tern-project: vim/tern-project
 
