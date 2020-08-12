@@ -12,6 +12,7 @@ Plug 'kshenoy/vim-signature' "show marks
 Plug 'bling/vim-airline' "theme
 Plug 'Valloric/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': './install.sh' } "auto completion support
 Plug 'tpope/vim-fugitive' "git plugin
+Plug 'rbong/vim-flog' "git log as tree
 Plug 'elzr/vim-json' "json highlighting, no-js warnings
 Plug 'tpope/vim-surround' "change brackets, quotes quickly
 Plug 'scrooloose/nerdcommenter' "comment utility
@@ -51,6 +52,7 @@ set dir=~/tmp
 set shortmess+=A
 set hidden
 set autoread
+set diffopt+=vertical " see diffs in vertical split panes (fugitive)
 
 filetype plugin indent on
 syntax enable
@@ -59,6 +61,8 @@ let g:javascript_plugin_jsdoc = 1
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx,*.tsx,*.php"
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_auto_hover='' " disable auto hover YCMHover
+set completeopt-=preview "ycm: disable preview in hsplit
 let NERDTreeAutoDeleteBuffer = 1
 let g:vim_jsx_pretty_colorful_config = 1
 autocmd BufNewFile,BufRead *.md set syntax=markdown
@@ -103,7 +107,7 @@ let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint']
-let g:ale_linters['typescript'] = ['tslint', 'tsserver']
+let g:ale_linters['typescript'] = ['tslint', 'tsserver', 'eslint']
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['typescript'] = ['prettier']
@@ -121,7 +125,8 @@ nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gt :YcmCompleter GoToType<CR>
 nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>f :YcmCompleter FixIt<CR>
-nnoremap <leader>t :YcmCompleter GetType<CR>
+"nnoremap <leader>t :YcmCompleter GetType<CR>
+nmap <leader>t <plug>(YCMHover)
 
 "============= WORKAROUNDS =============
 
