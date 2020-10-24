@@ -71,9 +71,13 @@ autocmd BufNewFile,BufRead .eslintrc set syntax=json
 " close vim if the only window left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " don't search filenames with Ag command
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:40%'), <bang>0)
 " search knowladge base with preview
-command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, extend(fzf#vim#with_preview('right'), {'dir': '~/Dropbox/DEV/kb/'}), <bang>0)
+command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': '~/Dropbox/DEV/kb/', 'up:40%'}), <bang>0)
+" customized files with preview window
+command! -bang -nargs=* FilesCustom call fzf#vim#files(<q-args>, fzf#vim#with_preview('up:40%'), <bang>0)
+" disable timeout when pressing esc in fzf window
+autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 " prevent clearing clipboard after closing (https://stackoverflow.com/a/9381778/741871)
 autocmd VimLeave * call system("xsel -ib", getreg('+'))
 
@@ -89,7 +93,7 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 "imporved default fzf command to exclude ignore files
 "https://github.com/junegunn/fzf.vim/issues/121
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
-nmap <C-p> <Esc>:Files<CR>
+nmap <C-p> <Esc>:FilesCustom<CR>
 
 " knowladge base shortcut
 nnoremap <leader>kb :KB<CR>
