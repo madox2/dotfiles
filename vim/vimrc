@@ -73,7 +73,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " don't search filenames with Ag command
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:40%'), <bang>0)
 " search knowladge base with preview
-command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': '~/Dropbox/DEV/kb/', 'up:40%'}), <bang>0)
+command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': '~/Dropbox/DEV/kb/'}, 'up:40%'), <bang>0)
 " customized files with preview window
 command! -bang -nargs=* FilesCustom call fzf#vim#files(<q-args>, fzf#vim#with_preview('up:40%'), <bang>0)
 " disable timeout when pressing esc in fzf window
