@@ -75,9 +75,9 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 " search knowladge base with preview
 command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': '~/Dropbox/DEV/kb/'}, 'up:40%'), <bang>0)
 " customized files with preview window
-command! -bang -nargs=* FilesCustom call fzf#vim#files(<q-args>, fzf#vim#with_preview('up:40%'), <bang>0)
-" disable timeout when pressing esc in fzf window
-autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+command! -bang -nargs=* Files call fzf#vim#files(<q-args>, fzf#vim#with_preview('up:40%'), <bang>0)
+" customized buffers with preview window
+command! -bang -nargs=* Buffers call fzf#vim#buffers(<q-args>, fzf#vim#with_preview('up:40%'), <bang>0)
 " prevent clearing clipboard after closing (https://stackoverflow.com/a/9381778/741871)
 autocmd VimLeave * call system("xsel -ib", getreg('+'))
 
@@ -93,7 +93,7 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 "imporved default fzf command to exclude ignore files
 "https://github.com/junegunn/fzf.vim/issues/121
 let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
-nmap <C-p> <Esc>:FilesCustom<CR>
+nmap <C-p> <Esc>:Files<CR>
 
 " knowladge base shortcut
 nnoremap <leader>kb :KB<CR>
@@ -167,3 +167,8 @@ let g:closetag_regions =  {
 " To enable javascript completer in JSX files (YCM)
 " https://github.com/ycm-core/YouCompleteMe/issues/1841#issuecomment-165025815
 autocmd BufEnter *.jsx set filetype=javascript
+
+" Eliminating esc delay (problems to close fzf window)
+" https://www.johnhawthorn.com/2012/09/vi-escape-delays/
+" https://github.com/junegunn/fzf/issues/1393#issuecomment-716585458
+set ttimeoutlen=0
