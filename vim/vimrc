@@ -30,6 +30,7 @@ Plug 'ianks/vim-tsx' "support jsx in tsx
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql' "syntax highlighting for graphql
+Plug 'vim-test/vim-test'
 call plug#end()
 
 "============= NOTES =============
@@ -65,6 +66,8 @@ let g:ycm_auto_hover='' " disable auto hover YCMHover
 set completeopt-=preview "ycm: disable preview in hsplit
 let NERDTreeAutoDeleteBuffer = 1
 let g:vim_jsx_pretty_colorful_config = 1
+" make test commands execute using Vim8 terminal
+let test#strategy = "vimterminal"
 autocmd BufNewFile,BufRead *.md set syntax=markdown
 autocmd BufNewFile,BufRead .prettierrc set syntax=json
 autocmd BufNewFile,BufRead .eslintrc set syntax=json
