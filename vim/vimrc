@@ -31,6 +31,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql' "syntax highlighting for graphql
 Plug 'vim-test/vim-test'
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 
 "============= NOTES =============
@@ -54,6 +55,7 @@ set shortmess+=A
 set hidden
 set autoread
 set diffopt+=vertical " see diffs in vertical split panes (fugitive)
+set termwinscroll=100000 " max n.o. lines in terminal
 
 filetype plugin indent on
 syntax enable
@@ -63,6 +65,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx,*.tsx,*.php"
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_auto_hover='' " disable auto hover YCMHover
+let g:jedi#popup_select_first = 0
 set completeopt-=preview "ycm: disable preview in hsplit
 let NERDTreeAutoDeleteBuffer = 1
 let g:vim_jsx_pretty_colorful_config = 1
@@ -86,7 +89,6 @@ autocmd VimLeave * call system("xsel -ib", getreg('+'))
 
 "============= BINDINGS =============
 nmap <Enter> :NERDTreeFind<CR>
-nmap <F5> :w<CR>:!node %<CR>
 nmap <Space> :Buffers<CR>
 nmap <C-@> :Ag<CR>
 nmap <C-N> :BLines<CR>
@@ -101,6 +103,11 @@ nmap <C-p> <Esc>:Files<CR>
 " knowladge base shortcut
 nnoremap <leader>kb :KB<CR>
 
+nnoremap <leader>tf :TestFile<CR>
+nnoremap <leader>tn :TestNearest<CR>
+nnoremap <leader>ts :TestSuite<CR>
+nnoremap <leader>tl :TestLast<CR>
+
 "============= THEME =============
 " Use terminal themes from https://github.com/Mayccoll/Gogh
 highlight colorcolumn ctermbg=0
@@ -114,10 +121,12 @@ let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint']
+let g:ale_linters['python'] = ['flake8', 'mypy']
 let g:ale_linters['typescript'] = ['tslint', 'tsserver', 'eslint']
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier', 'eslint']
 let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_fixers['python'] = ['black']
 let g:ale_fixers['scss'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['less'] = ['prettier']
@@ -133,12 +142,11 @@ let g:ale_javascript_eslint_executable = 'eslint_d'
 "============= DIAGNOSTIC/COMPLETER =============
 " tyypescript/javascript mappings
 nnoremap <leader>gg :YcmCompleter GoTo<CR>
-nnoremap <leader>gd :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>gt :YcmCompleter GoToType<CR>
 nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>f :YcmCompleter FixIt<CR>
-"nnoremap <leader>t :YcmCompleter GetType<CR>
-nmap <leader>t <plug>(YCMHover)
+nnoremap <leader>gi :YcmCompleter GetType<CR>
+nmap <leader>gi <plug>(YCMHover)
 
 "============= WORKAROUNDS =============
 
