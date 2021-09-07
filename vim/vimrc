@@ -28,7 +28,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim' "typescript code highlighting
 Plug 'ianks/vim-tsx' "support jsx in tsx
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 Plug 'jparise/vim-graphql' "syntax highlighting for graphql
 Plug 'vim-test/vim-test'
 Plug 'davidhalter/jedi-vim'
