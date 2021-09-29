@@ -10,7 +10,7 @@ Plug 'jiangmiao/auto-pairs' "auto brackets, quotes, ...
 Plug 'mileszs/ack.vim' "find in files
 Plug 'kshenoy/vim-signature' "show marks
 Plug 'bling/vim-airline' "theme
-Plug 'Valloric/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': './install.sh' } "auto completion support
+Plug 'Valloric/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': 'python3 install.py --ts-completer' } "auto completion support
 Plug 'tpope/vim-fugitive' "git plugin
 Plug 'rbong/vim-flog' "git log as tree
 Plug 'elzr/vim-json' "json highlighting, no-js warnings
@@ -23,7 +23,7 @@ Plug 'christoomey/vim-tmux-navigator' "seamles tmux-vim navigation ctrl+hjkl
 Plug 'godlygeek/tabular' "tabular indentation utils
 Plug 'w0rp/ale' "linting, auto fixing engine
 Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'leafgarland/typescript-vim' "typescript code highlighting
 Plug 'ianks/vim-tsx' "support jsx in tsx
@@ -33,10 +33,8 @@ Plug 'vim-test/vim-test'
 Plug 'davidhalter/jedi-vim'
 call plug#end()
 
-"============= NOTES =============
-"JS/TS autocompletion
-" - install typescript (npm i -g typescript)
-" - https://github.com/Valloric/YouCompleteMe#javascript-and-typescript-semantic-completion
+"use with vim 8.2 and higher
+"fzf syntax highlighting: apt install bat (https://github.com/sharkdp/bat)
 
 "============= PREFERENCES =============
 set clipboard^=unnamed,unnamedplus
@@ -49,7 +47,7 @@ set expandtab
 set nu
 set swapfile
 set backupcopy=yes
-set dir=~/tmp
+set dir=/tmp
 set shortmess+=A
 set hidden
 set autoread
