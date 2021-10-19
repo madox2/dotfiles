@@ -71,6 +71,7 @@ let test#strategy = "vimterminal"
 autocmd BufNewFile,BufRead *.md set syntax=markdown
 autocmd BufNewFile,BufRead .prettierrc set syntax=json
 autocmd BufNewFile,BufRead .eslintrc set syntax=json
+autocmd BufNewFile,BufRead Jenkinsfile* set syntax=groovy
 " close vim if the only window left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " don't search filenames with Ag command
