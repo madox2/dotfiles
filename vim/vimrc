@@ -31,6 +31,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jparise/vim-graphql' "syntax highlighting for graphql
 Plug 'vim-test/vim-test'
 Plug 'davidhalter/jedi-vim'
+Plug 'jenterkin/vim-autosource'
 call plug#end()
 
 "use with vim 8.2 and higher
@@ -68,6 +69,7 @@ let NERDTreeAutoDeleteBuffer = 1
 let g:vim_jsx_pretty_colorful_config = 1
 " make test commands execute using Vim8 terminal
 let test#strategy = "vimterminal"
+let g:autosource_conf_names = '.vimrc_local'
 autocmd BufNewFile,BufRead *.md set syntax=markdown
 autocmd BufNewFile,BufRead .prettierrc set syntax=json
 autocmd BufNewFile,BufRead .eslintrc set syntax=json
@@ -137,7 +139,6 @@ let g:ale_javascript_prettier_use_local_config = 1
 " use eslint_d to speed up linting (requires global eslint_d to be installed)
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
-
 
 "============= DIAGNOSTIC/COMPLETER =============
 " tyypescript/javascript mappings
