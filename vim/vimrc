@@ -139,6 +139,9 @@ let g:ale_javascript_prettier_use_local_config = 1
 " use eslint_d to speed up linting (requires global eslint_d to be installed)
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
+" show ALEDetail in a floating window
+let g:ale_floating_preview=1
+let g:ale_floating_window_border = []
 
 "============= DIAGNOSTIC/COMPLETER =============
 " tyypescript/javascript mappings
@@ -146,8 +149,11 @@ nnoremap <leader>gg :YcmCompleter GoTo<CR>
 nnoremap <leader>gt :YcmCompleter GoToType<CR>
 nnoremap <leader>gr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>f :YcmCompleter FixIt<CR>
-nnoremap <leader>gi :YcmCompleter GetType<CR>
-nmap <leader>gi <plug>(YCMHover)
+" show diagnostic
+nnoremap <leader>d :ALEDetail<CR>
+" show symbol info (type)
+"nnoremap <leader>t :ALEHover<CR>
+nmap <leader>h <plug>(YCMHover)
 
 "============= WORKAROUNDS =============
 
