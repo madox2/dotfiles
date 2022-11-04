@@ -139,6 +139,8 @@ let g:ale_javascript_prettier_use_local_config = 1
 " use eslint_d to speed up linting (requires global eslint_d to be installed)
 let g:ale_javascript_eslint_use_global = 1
 let g:ale_javascript_eslint_executable = 'eslint_d'
+let g:ale_typescript_eslint_use_global = 1
+let g:ale_typescript_eslint_executable = 'eslint_d'
 " show ALEDetail in a floating window
 let g:ale_floating_preview=1
 let g:ale_floating_window_border = []
