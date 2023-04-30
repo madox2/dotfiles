@@ -1,3 +1,4 @@
+
 "============= PLUGINS =============
 call plug#begin('~/.vim/plugged')
 Plug 'bronson/vim-trailing-whitespace' "remove trailing whitespaces
@@ -10,7 +11,7 @@ Plug 'jiangmiao/auto-pairs' "auto brackets, quotes, ...
 Plug 'mileszs/ack.vim' "find in files
 Plug 'kshenoy/vim-signature' "show marks
 Plug 'bling/vim-airline' "theme
-Plug 'Valloric/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': 'python3 install.py --ts-completer' } "auto completion support
+Plug 'Valloric/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': 'python3 install.py --ts-completer' }
 Plug 'tpope/vim-fugitive' "git plugin
 Plug 'rbong/vim-flog' "git log as tree
 Plug 'elzr/vim-json' "json highlighting, no-js warnings
@@ -32,6 +33,10 @@ Plug 'jparise/vim-graphql' "syntax highlighting for graphql
 Plug 'vim-test/vim-test'
 Plug 'davidhalter/jedi-vim'
 Plug 'jenterkin/vim-autosource'
+Plug 'madox2/vim-ai'
+"Plug '/home/m/Repos/vim-ai'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 call plug#end()
 
 "use with vim 8.2 and higher
@@ -67,6 +72,7 @@ let g:jedi#popup_select_first = 0
 set completeopt-=preview "ycm: disable preview in hsplit
 let NERDTreeAutoDeleteBuffer = 1
 let g:vim_jsx_pretty_colorful_config = 1
+let g:vim_markdown_folding_disabled = 1
 " make test commands execute using Vim8 terminal
 let test#strategy = "vimterminal"
 let g:autosource_conf_names = '.vimrc_local'
@@ -108,6 +114,16 @@ nnoremap <leader>tn :TestNearest<CR>
 nnoremap <leader>ts :TestSuite<CR>
 nnoremap <leader>tl :TestLast<CR>
 
+" vim-ai
+xnoremap <leader>c :AIChat<CR>
+nnoremap <leader>c :AIChat<CR>
+nnoremap <leader>r :AIRedo<CR>
+let g:vim_ai_chat = {
+\  "ui": {
+\    "open_chat_command": "preset_right",
+\  },
+\}
+
 "============= THEME =============
 " Use terminal themes from https://github.com/Mayccoll/Gogh
 highlight colorcolumn ctermbg=0
@@ -144,6 +160,7 @@ let g:ale_typescript_eslint_executable = 'eslint_d'
 " show ALEDetail in a floating window
 let g:ale_floating_preview=1
 let g:ale_floating_window_border = []
+let g:ale_virtualtext_cursor = 'disabled'
 
 "============= DIAGNOSTIC/COMPLETER =============
 " tyypescript/javascript mappings
