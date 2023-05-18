@@ -120,7 +120,7 @@ nnoremap <leader>c :AIChat<CR>
 nnoremap <leader>r :AIRedo<CR>
 let g:vim_ai_chat = {
 \  "ui": {
-\    "open_chat_command": "preset_right",
+\    "open_chat_command": "preset_tab",
 \  },
 \}
 
@@ -210,3 +210,8 @@ autocmd BufEnter .env.* set filetype=sh
 " https://www.johnhawthorn.com/2012/09/vi-escape-delays/
 " https://github.com/junegunn/fzf/issues/1393#issuecomment-716585458
 set ttimeoutlen=0
+
+" Fix indentation bug in markdown files
+" https://github.com/preservim/vim-markdown/issues/126#issuecomment-640890790
+au filetype markdown set formatoptions+=ro
+au filetype markdown set comments=b:*,b:-,b:+,b:1.
