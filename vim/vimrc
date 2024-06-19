@@ -1,4 +1,3 @@
-
 "============= PLUGINS =============
 call plug#begin('~/.vim/plugged')
 Plug 'bronson/vim-trailing-whitespace' "remove trailing whitespaces
@@ -37,6 +36,7 @@ Plug 'madox2/vim-ai'
 "Plug '/home/m/Repos/vim-ai'
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
+Plug 'posva/vim-vue'
 call plug#end()
 
 "use with vim 8.2 and higher
@@ -76,6 +76,9 @@ let g:vim_markdown_folding_disabled = 1
 " make test commands execute using Vim8 terminal
 let test#strategy = "vimterminal"
 let g:autosource_conf_names = '.vimrc_local'
+let g:flog_use_internal_lua = 1
+let g:vim_ai_roles_path = '/home/m/.vim/vim_ai/roles.yaml'
+
 autocmd BufNewFile,BufRead *.md set syntax=markdown
 autocmd BufNewFile,BufRead .prettierrc set syntax=json
 autocmd BufNewFile,BufRead .eslintrc set syntax=json
@@ -93,7 +96,8 @@ command! -bang -nargs=* Buffers call fzf#vim#buffers(<q-args>, fzf#vim#with_prev
 " prevent clearing clipboard after closing (https://stackoverflow.com/a/9381778/741871)
 autocmd VimLeave * call system("xsel -ib", getreg('+'))
 
-"============= BINDINGS =============
+
+"============= BINDINGS/COMMANDS =============
 nmap <Enter> :NERDTreeFind<CR>
 nmap <Space> :Buffers<CR>
 nmap <C-@> :Ag<CR>
@@ -118,11 +122,9 @@ nnoremap <leader>tl :TestLast<CR>
 xnoremap <leader>c :AIChat<CR>
 nnoremap <leader>c :AIChat<CR>
 nnoremap <leader>r :AIRedo<CR>
-let g:vim_ai_chat = {
-\  "ui": {
-\    "open_chat_command": "preset_tab",
-\  },
-\}
+
+command! ALEDisableFixer let g:ale_fix_on_save=0
+command! ALEEnableFixer let g:ale_fix_on_save=1
 
 "============= THEME =============
 " Use terminal themes from https://github.com/Mayccoll/Gogh
@@ -137,7 +139,7 @@ let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint']
-let g:ale_linters['json'] = []
+let g:ale_linters['json'] = ['eslint']
 let g:ale_linters['python'] = ['flake8', 'mypy']
 let g:ale_linters['typescript'] = ['tslint', 'tsserver', 'eslint']
 let g:ale_fixers = {}
@@ -148,7 +150,7 @@ let g:ale_fixers['python'] = ['black']
 let g:ale_fixers['scss'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
 let g:ale_fixers['less'] = ['prettier']
-let g:ale_fixers['json'] = ['prettier']
+let g:ale_fixers['json'] = ['prettier', 'eslint']
 let g:ale_fixers['yaml'] = ['prettier']
 let g:ale_javascript_prettier_use_local_config = 1
 
