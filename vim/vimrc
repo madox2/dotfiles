@@ -10,7 +10,7 @@ Plug 'jiangmiao/auto-pairs' "auto brackets, quotes, ...
 Plug 'mileszs/ack.vim' "find in files
 Plug 'kshenoy/vim-signature' "show marks
 Plug 'bling/vim-airline' "theme
-Plug 'Valloric/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': 'python3 install.py --ts-completer' }
+Plug 'Valloric/YouCompleteMe', { 'dir': '~/.vim/plugged/YouCompleteMe', 'do': 'python3 install.py --all' }
 Plug 'tpope/vim-fugitive' "git plugin
 Plug 'rbong/vim-flog' "git log as tree
 Plug 'elzr/vim-json' "json highlighting, no-js warnings
