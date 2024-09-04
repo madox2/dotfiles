@@ -9,6 +9,7 @@
     ~/.tmux.new-workspace.conf: tmux/tmux.new-workspace.conf
     ~/.tmux.vim-edit-output.sh: tmux/tmux.vim-edit-output.sh
     ~/.vimrc: vim/vimrc
+    ~/.ideavimrc: vim/ideavimrc
     ~/.tern-project: vim/tern-project
 
 - shell:
