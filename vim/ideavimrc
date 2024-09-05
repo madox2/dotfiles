@@ -39,10 +39,13 @@ set clipboard+=unnamed
 
 " search for: track action ids
 " https://github.com/JetBrains/ideavim?tab=readme-ov-file#finding-action-ids
+" :source ~/.ideavimrc
 
-map g; :action JumpToLastChange<Enter>
-map g, :action JumpToNextChange<Enter>
-map gg :action GotoImplementation<Enter>
-
+nmap g; :action JumpToLastChange<Enter>
+nmap g, :action JumpToNextChange<Enter>
+nmap \gg :action GotoImplementation<Enter>
+nmap <Space> :action RecentFiles<Enter>
+nmap <C-p> :action GotoFile<Enter>
 nmap <C-o> :action Back<Enter>
 nmap <C-i> :action Forward<Enter>
+nmap <C-b>z :action HideAllWindows<Enter>
