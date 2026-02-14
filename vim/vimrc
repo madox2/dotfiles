@@ -90,7 +90,11 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " don't search filenames with Ag command
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:40%'), <bang>0)
 " search knowladge base with preview
-command! -bang -nargs=* KB call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'dir': '~/Dropbox/DEV/kb/'}, 'up:40%'), <bang>0)
+function! s:kb(dir, bang)
+  let l:dir = a:dir !=# '' ? a:dir : '~/Dropbox/DEV/kb/'
+  call fzf#vim#ag('', fzf#vim#with_preview({'dir': l:dir}, 'up:50%'), a:bang)
+endfunction
+command! -bang -nargs=* -complete=dir KB call s:kb(<q-args>, <bang>0)
 " customized files with preview window
 command! -bang -nargs=* Files call fzf#vim#files(<q-args>, fzf#vim#with_preview('up:40%'), <bang>0)
 " customized buffers with preview window
