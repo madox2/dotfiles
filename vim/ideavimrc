@@ -44,8 +44,10 @@ set clipboard+=unnamed
 nmap g; :action JumpToLastChange<Enter>
 nmap g, :action JumpToNextChange<Enter>
 nmap \gg :action GotoImplementation<Enter>
+nmap \gu :action FindUsages<Enter>
 nmap <Space> :action RecentFiles<Enter>
 nmap <C-p> :action GotoFile<Enter>
 nmap <C-o> :action Back<Enter>
 nmap <C-i> :action Forward<Enter>
 nmap <C-b>z :action HideAllWindows<Enter>
+command! Vim action OpenInAssociatedApplication
